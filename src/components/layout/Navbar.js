@@ -20,6 +20,7 @@ export function renderNavbar() {
           <a href="/products?category=computers" data-nav>Computers</a>
           <a href="/products?category=smartphones" data-nav>Smartphones</a>
           <a href="/products?category=butchery-equipment" data-nav>Butchery Equipment</a>
+          <a href="/products?category=kitchenware" data-nav>Kitchenware</a>
           <a href="/about-us" data-nav>About Us</a>
 
         </nav>
