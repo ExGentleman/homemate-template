@@ -2753,9 +2753,16 @@ main {
 
   .product-detail,
   .auth-grid,
-  .variant-card,
   .profile-grid {
     grid-template-columns: 1fr;
+  }
+
+  .variant-card {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .variant-card > div:first-child {
+    grid-column: 1 / -1;
   }
 
   .about-principles,
