@@ -16,6 +16,16 @@ export async function createOrder({ orderNumber, paymentMethod, items }) {
   return data
 }
 
+export async function cancelOrder(orderNumber) {
+  const { data, error } = await requireSupabase().rpc('cancel_order', {
+    p_order_number: orderNumber
+  })
+
+  if (error) throw new Error(`Unable to cancel order: ${error.message}`)
+  if (!data) throw new Error('The order was not cancelled. Please try again.')
+  return data
+}
+
 export async function listOrders() {
   const client = requireSupabase()
   const { data, error } = await client

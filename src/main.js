@@ -13,7 +13,7 @@ import { renderAbout } from './pages/About.js'
 import { addProduct, initializeProducts, products, removeProduct, updateProduct } from './data/products.js'
 import { listCustomers } from './data/customers.js'
 import { fetchAdminStats } from './data/adminStats.js'
-import { createOrder, listOrders } from './data/orders.js'
+import { cancelOrder, createOrder, listOrders } from './data/orders.js'
 import { cartStore } from './stores/cartStore.js'
 import { wishlistStore } from './stores/wishlistStore.js'
 import { authStore } from './stores/authStore.js'
@@ -186,6 +186,22 @@ async function loadOrdersPage() {
     if (window.location.pathname !== '/orders') return
     main.innerHTML = renderOrders(orders)
     bindLayoutEvents()
+    main.querySelectorAll('[data-cancel-order]').forEach((button) => {
+      button.addEventListener('click', async () => {
+        if (!window.confirm('Cancel this order? This cannot be undone.')) return
+
+        const status = button.parentElement.querySelector('[data-order-cancel-status]')
+        button.disabled = true
+        status.textContent = 'Cancelling order...'
+        try {
+          await cancelOrder(button.dataset.cancelOrder)
+          await loadOrdersPage()
+        } catch (error) {
+          status.textContent = error instanceof Error ? error.message : 'Unable to cancel order.'
+          button.disabled = false
+        }
+      })
+    })
   } catch (error) {
     if (window.location.pathname !== '/orders') return
     main.innerHTML = '<section class="empty-state"><h1>Unable to load orders</h1><p data-orders-error></p></section>'

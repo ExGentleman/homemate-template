@@ -47,6 +47,12 @@ export function renderOrders(orders) {
                 `).join('')}
               </ul>
               <footer><span>Total · shipping free</span><strong>${money(order.subtotal)}</strong></footer>
+              ${authStore.user.role === 'customer' && order.status === 'pending_whatsapp' ? `
+                <div class="order-cancel-actions">
+                  <button type="button" class="order-cancel-button" data-cancel-order="${escapeHtml(order.order_number)}">Cancel order</button>
+                  <p data-order-cancel-status role="status" aria-live="polite"></p>
+                </div>
+              ` : ''}
             </article>
           `).join('')}
         </div>
