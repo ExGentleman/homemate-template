@@ -243,6 +243,7 @@ export function renderAdminDashboard(
               <form class="admin-product-form admin-edit-product-form" data-edit-product-form>
                 <label>Product name<input name="name" maxlength="80" value="${escapeHtml(editingProduct.name)}" required /></label>
                 <label>Price (USD)<input name="price" type="number" min="0.01" step="0.01" value="${editingProduct.price}" required /></label>
+                <label>Stock quantity<input name="stock" type="number" min="0" step="1" value="${editingProduct.stock}" required /></label>
                 <label class="specs-field">Specifications / description
                   <textarea name="specs" maxlength="4000" rows="5" required>${escapeHtml(editingProduct.specs || editingProduct.variant)}</textarea>
                 </label>

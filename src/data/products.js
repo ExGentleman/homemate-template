@@ -72,19 +72,23 @@ export async function addProduct({ name, category, specs, variant, price, stock,
   return product
 }
 
-export async function updateProduct(id, { name, specs, price, images }) {
+export async function updateProduct(id, { name, specs, price, stock, images }) {
   const product = findProduct(id)
   if (!product) throw new Error('This product is no longer available.')
 
   const normalizedName = String(name ?? '').trim()
   const normalizedSpecs = String(specs ?? '').trim()
   const parsedPrice = Number(price)
+  const parsedStock = Number(stock)
 
   if (!normalizedName || !normalizedSpecs) {
     throw new Error('Name and specifications are required.')
   }
   if (!Number.isFinite(parsedPrice) || parsedPrice <= 0) {
     throw new Error('Enter a price greater than zero.')
+  }
+  if (!Number.isInteger(parsedStock) || parsedStock < 0) {
+    throw new Error('Stock must be a whole number of zero or more.')
   }
   if (!Array.isArray(images) || !images.some((image) => String(image).trim())) {
     throw new Error('Keep or add at least one product image.')
@@ -98,6 +102,7 @@ export async function updateProduct(id, { name, specs, price, images }) {
       variant: normalizedSpecs,
       specs: normalizedSpecs,
       price: parsedPrice,
+      stock: parsedStock,
       image: productImages[0],
       images: productImages
     })

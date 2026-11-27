@@ -403,6 +403,7 @@ function bindPageEvents() {
           name: data.get('name')?.toString() || '',
           specs: data.get('specs')?.toString() || '',
           price: data.get('price')?.toString() || '',
+          stock: data.get('stock')?.toString() || '',
           images
         })
         editingProductId = null
