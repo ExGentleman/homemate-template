@@ -71,6 +71,7 @@ export function navigate(path) {
   }
   window.history.pushState({}, '', path)
   renderApp()
+  window.scrollTo(0, 0)
 }
 
 export function renderApp() {
