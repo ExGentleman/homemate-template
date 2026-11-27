@@ -27,6 +27,8 @@ let editingProductId = null
 let adminCustomers = null
 let adminCustomersError = ''
 let adminCustomersLoading = false
+let lastMobileScrollY = 0
+let mobileNavbarScrollFrame = null
 
 const routes = {
   '/': renderHome,
@@ -78,6 +80,7 @@ export function renderApp() {
     admin: window.location.pathname === '/admin',
     deviceHome: isHome
   })
+  setupMobileNavbarAutoHide()
   document.title = isHome
     ? 'Homemate™ | Business, Kitchenware & Butchery Equipment'
     : 'Homemate™ | Computers, Kitchenware & Butchery Equipment'
@@ -100,6 +103,44 @@ export function renderApp() {
     loadAdminCustomers()
   }
   if (window.location.pathname === '/orders') loadOrdersPage()
+}
+
+function setupMobileNavbarAutoHide() {
+  if (typeof window === 'undefined') return
+
+  const app = document.querySelector('#app')
+  const header = document.querySelector('.fashion-header')
+  if (!app || !header) return
+
+  header.classList.remove('is-nav-hidden')
+  lastMobileScrollY = window.scrollY
+
+  if (window.mobileNavbarScrollBound) return
+  window.mobileNavbarScrollBound = true
+
+  window.addEventListener('scroll', () => {
+    if (mobileNavbarScrollFrame !== null) return
+
+    mobileNavbarScrollFrame = window.requestAnimationFrame(() => {
+      mobileNavbarScrollFrame = null
+      const isMobile = window.matchMedia('(max-width: 560px)').matches
+      const isHome = window.location.pathname === '/'
+      const currentScrollY = Math.max(window.scrollY, 0)
+      const header = document.querySelector('.fashion-header')
+
+      if (!isMobile || isHome || !header) {
+        header?.classList.remove('is-nav-hidden')
+      } else if (currentScrollY <= 10) {
+        header.classList.remove('is-nav-hidden')
+      } else if (currentScrollY > lastMobileScrollY + 6) {
+        header.classList.add('is-nav-hidden')
+      } else if (currentScrollY < lastMobileScrollY - 6) {
+        header.classList.remove('is-nav-hidden')
+      }
+
+      lastMobileScrollY = currentScrollY
+    })
+  }, { passive: true })
 }
 
 async function loadAdminDashboardStats() {
