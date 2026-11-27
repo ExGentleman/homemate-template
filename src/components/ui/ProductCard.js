@@ -8,13 +8,16 @@ export function productCard(product) {
   const name = escapeHtml(product.name)
   const category = escapeHtml(product.category)
   const specs = escapeHtml(product.specs || product.variant)
-  const image = escapeHtml(product.image)
+  const images = Array.isArray(product.images) && product.images.length
+    ? product.images
+    : [product.image]
+  const image = escapeHtml(images[0] || product.image)
 
   return `
     <article class="product-card">
 
       <a href="/products/${slug}" data-nav>
-        <img src="${image}" alt="${name}" />
+        <img src="${image}" alt="${name}" data-product-carousel="${id}" />
       </a>
       <div class="product-card-body">
         <p>${category}</p>

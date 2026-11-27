@@ -29,6 +29,7 @@ let adminCustomersError = ''
 let adminCustomersLoading = false
 let lastMobileScrollY = 0
 let mobileNavbarScrollFrame = null
+let productCarouselInterval = null
 
 const routes = {
   '/': renderHome,
@@ -75,6 +76,11 @@ export function navigate(path) {
 }
 
 export function renderApp() {
+  if (productCarouselInterval !== null) {
+    window.clearInterval(productCarouselInterval)
+    productCarouselInterval = null
+  }
+
   const app = document.querySelector('#app')
   const isHome = window.location.pathname === '/'
   app.innerHTML = renderLayout(getRoute()(), {
@@ -246,6 +252,23 @@ function bindLayoutEvents() {
 }
 
 function bindPageEvents() {
+  const productCarousels = [...document.querySelectorAll('[data-product-carousel]')]
+    .map((image) => {
+      const product = products.find((item) => item.id === image.dataset.productCarousel)
+      const images = product?.images?.length ? product.images : product ? [product.image] : []
+      return { image, images, index: 0 }
+    })
+    .filter((carousel) => carousel.images.length > 1)
+
+  if (productCarousels.length) {
+    productCarouselInterval = window.setInterval(() => {
+      productCarousels.forEach((carousel) => {
+        carousel.index = (carousel.index + 1) % carousel.images.length
+        carousel.image.src = carousel.images[carousel.index]
+      })
+    }, 3500)
+  }
+
   const checkoutButton = document.querySelector('.checkout-button')
   const checkoutForm = document.querySelector('[data-checkout-form]')
   if (checkoutButton && checkoutForm) {
