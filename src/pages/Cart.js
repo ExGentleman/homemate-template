@@ -43,7 +43,9 @@ export function renderCart() {
                 <button data-id="${escapeHtml(product.id)}" data-qty="${quantity + 1}" ${quantity >= product.stock ? 'disabled' : ''}>+</button>
               </div>
               <strong>${money(product.price * quantity)}</strong>
-              <button class="remove-button" title="Remove item" data-remove="${escapeHtml(product.id)}">Remove</button>
+              <button class="remove-button" type="button" title="Remove item" aria-label="Remove ${escapeHtml(product.name)} from cart" data-remove="${escapeHtml(product.id)}">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M8 6V4h8v2m3 0-1 14H6L5 6m4 4v6m6-6v6"/></svg>
+              </button>
             </article>
           `).join('')}
         </div>

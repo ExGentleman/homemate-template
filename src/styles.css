@@ -585,7 +585,9 @@ main {
   border: 1.5px solid #e0e0e0;
   border-radius: 8px;
   display: flex;
+  justify-self: start;
   overflow: hidden;
+  width: fit-content;
 }
 
 .qty-control button {
@@ -602,8 +604,29 @@ main {
 }
 
 .remove-button {
+  align-items: center;
   background: transparent;
+  border-radius: 8px;
   color: #9aa0ad;
+  display: inline-flex;
+  height: 40px;
+  justify-content: center;
+  width: 40px;
+}
+
+.remove-button svg {
+  fill: none;
+  height: 20px;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+  width: 20px;
+}
+
+.remove-button:hover {
+  background: #fef2f2;
+  color: #b91c1c;
 }
 
 .summary-card {
