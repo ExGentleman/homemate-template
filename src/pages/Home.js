@@ -42,7 +42,7 @@ export function renderHome() {
 
         <article class="device-collection-card">
           <a class="device-collection-hero" href="/products?category=kitchenware" data-nav aria-label="Shop kitchenware">
-            <img src="/assets/homemate-symbol.png" alt="Homemate kitchenware" loading="lazy" />
+            <img src="https://plus.unsplash.com/premium_photo-1678375722686-c7ea507c3003?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D" alt="Homemate kitchenware" loading="lazy" />
           </a>
           <div class="device-collection-copy">
             <div>
