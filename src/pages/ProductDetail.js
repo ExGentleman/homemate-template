@@ -54,10 +54,12 @@ export function renderProductDetail(slug) {
               </div>
               <strong>${money(variant.price)}</strong>
               
-              <button data-add-product="${escapeHtml(variant.id)}">Add to cart</button>
-              <button class="like-button ${wishlistStore.hasProduct(variant.id) ? 'is-liked' : ''}" data-toggle-wishlist="${escapeHtml(variant.id)}" title="Like ${name}" aria-label="Like ${name}">
-                ${wishlistStore.hasProduct(variant.id) ? heartFilledIcon() : heartIcon()}
-              </button>
+              <div class="variant-actions">
+                <button data-add-product="${escapeHtml(variant.id)}">Add to cart</button>
+                <button class="like-button ${wishlistStore.hasProduct(variant.id) ? 'is-liked' : ''}" data-toggle-wishlist="${escapeHtml(variant.id)}" title="Like ${name}" aria-label="Like ${name}">
+                  ${wishlistStore.hasProduct(variant.id) ? heartFilledIcon() : heartIcon()}
+                </button>
+              </div>
             </article>
           `).join('')}
         </div>
