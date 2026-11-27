@@ -28,7 +28,7 @@ export function renderHome() {
 
         <article class="device-collection-card device-collection-card-dark">
           <a class="device-collection-hero" href="/products?category=smartphones" data-nav aria-label="Shop smartphones">
-            <img src="/smartphones/iphone_x_1.webp" alt="iPhone X" loading="lazy" />
+            <img src="https://images.unsplash.com/photo-1726587912121-ea21fcc57ff8?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D" alt="iPhone X" loading="lazy" />
           </a>
           <div class="device-collection-copy">
             <div>
