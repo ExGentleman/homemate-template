@@ -320,7 +320,7 @@ function bindPageEvents() {
           items
         })
         const orderLines = order.items.map((item) =>
-          `• ${item.quantity} × ${item.name}${item.variant ? ` (${item.variant})` : ''} — ${formatMoney(Number(item.price) * item.quantity)}`
+          `• ${item.quantity} × ${item.name} — ${formatMoney(Number(item.price) * item.quantity)}`
         )
         const message = [
           'Hello Homemate! I’d like to place an order:',
