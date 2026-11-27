@@ -79,8 +79,8 @@ export function renderApp() {
     deviceHome: isHome
   })
   document.title = isHome
-    ? 'Homemate™ | Business & Butchery Equipment'
-    : 'Homemate™ | Computers & Butchery Equipment'
+    ? 'Homemate™ | Business, Kitchenware & Butchery Equipment'
+    : 'Homemate™ | Computers, Kitchenware & Butchery Equipment'
   bindLayoutEvents()
   bindPageEvents()
   if (

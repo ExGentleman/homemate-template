@@ -17,6 +17,14 @@ export function renderAbout() {
     'Weighing Scales & Meat Trays',
     'Butchery Knives, Blocks & Tools'
   ]
+  const kitchenwareProducts = [
+    'Cookware Pots, Pans & Utensils',
+    'Kitchen Cutlery & Chopping Boards',
+    'Food Storage Containers',
+    'Kitchen Appliances',
+    'Commercial Cooking Equipment',
+    'Tableware & Serving Equipment'
+  ]
   const reasons = [
     ['Quality Guaranteed', 'We stock durable, tested equipment.'],
     ['Affordable Prices', 'Best value for businesses of all sizes.'],
@@ -30,9 +38,9 @@ export function renderAbout() {
       <header class="about-hero">
         <p class="eyebrow">About Homemate</p>
         <h1>Equipment for businesses building what’s next.</h1>
-        <p>Homemate is a trusted supplier of quality computers and commercial butchery equipment in Zimbabwe.</p>
+        <p>Homemate is a trusted supplier of quality computers, kitchenware, and commercial butchery equipment in Zimbabwe.</p>
         <p>We help businesses, schools, offices, and butcheries work smarter with reliable equipment, fair prices, and after-sales support you can depend on.</p>
-        <p>Whether you are setting up a new office, upgrading your IT, or opening a butchery, Homemate is your one-stop partner.</p>
+        <p>Whether you are setting up a new office, upgrading your IT, stocking a kitchen, or opening a butchery, Homemate is your one-stop partner.</p>
       </header>
 
       <section class="about-principles" aria-label="Our mission and vision">
@@ -44,7 +52,7 @@ export function renderAbout() {
         <article class="about-panel">
           <p class="eyebrow">Our Vision</p>
           <h2>Zimbabwe’s trusted supplier</h2>
-          <p>To become Zimbabwe's most trusted supplier for computers and butchery equipment — known for quality, honesty, and excellent service.</p>
+          <p>To become Zimbabwe's most trusted supplier for computers, kitchenware, and butchery equipment — known for quality, honesty, and excellent service.</p>
         </article>
       </section>
 
@@ -63,6 +71,11 @@ export function renderAbout() {
             <h3>2. Butchery Equipment</h3>
             <ul>${butcheryProducts.map((item) => `<li>${item}</li>`).join('')}</ul>
             <a href="/products?category=butchery-equipment" data-nav>Explore butchery equipment <span aria-hidden="true">→</span></a>
+          </article>
+          <article class="about-panel">
+            <h3>3. Kitchenware</h3>
+            <ul>${kitchenwareProducts.map((item) => `<li>${item}</li>`).join('')}</ul>
+            <a href="/products?category=kitchenware" data-nav>Explore kitchenware <span aria-hidden="true">→</span></a>
           </article>
         </div>
       </section>

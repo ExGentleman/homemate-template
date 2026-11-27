@@ -9,7 +9,7 @@ export function renderHome() {
       <div class="device-home-intro">
         <p class="eyebrow">Homemate Enterprises</p>
         <h1>We Deliver What We Promise.</h1>
-        <p>Explore reliable computers, smartphones, and commercial butchery equipment for your business.</p>
+        <p>Explore reliable computers, smartphones, kitchenware, and commercial butchery equipment for your business.</p>
         </div>
         <div class="device-collection-grid">
           <article class="device-collection-card">
@@ -41,16 +41,16 @@ export function renderHome() {
         </article>
 
         <article class="device-collection-card">
-          <a class="device-collection-hero" href="/products" data-nav aria-label="Shop all devices">
-            <img src="/Laptop%20Sales/Lenovo%20%2820%29.jpg" alt="Lenovo laptop" loading="lazy" />
+          <a class="device-collection-hero" href="/products?category=kitchenware" data-nav aria-label="Shop kitchenware">
+            <img src="/assets/homemate-symbol.png" alt="Homemate kitchenware" loading="lazy" />
           </a>
           <div class="device-collection-copy">
             <div>
-              <p class="device-collection-kicker">One place. Better choices.</p>
-              <h2>All Devices</h2>
-              <p>Compare computers and smartphones, then find the right fit for you.</p>
+              <p class="device-collection-kicker">Cook. Store. Serve.</p>
+              <h2>Kitchenware</h2>
+              <p>Shop practical cookware and kitchen essentials for homes and businesses.</p>
             </div>
-            <a class="device-collection-button" href="/products" data-nav>Explore all devices <span aria-hidden="true">→</span></a>
+            <a class="device-collection-button" href="/products?category=kitchenware" data-nav>Shop kitchenware <span aria-hidden="true">→</span></a>
           </div>
         </article>
       </div>

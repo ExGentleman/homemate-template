@@ -27,7 +27,7 @@ export async function addProduct({ name, category, specs, variant, price, stock,
     throw new Error('Name and specifications are required.')
   }
   if (!normalizedCategory) {
-    throw new Error('Choose Computers, Smartphones, or Butchery Equipment as the product category.')
+    throw new Error('Choose Computers, Smartphones, Butchery Equipment, or Kitchenware as the product category.')
   }
   if (!Number.isFinite(parsedPrice) || parsedPrice <= 0) {
     throw new Error('Enter a price greater than zero.')
@@ -141,6 +141,7 @@ function normalizeStoreCategory(category) {
   if (normalized === 'computers') return 'Computers'
   if (normalized === 'smartphones') return 'Smartphones'
   if (normalized === 'butchery equipment' || normalized === 'butchery equipments') return 'Butchery Equipment'
+  if (normalized === 'kitchenware' || normalized === 'kitchen ware') return 'Kitchenware'
   return null
 }
 
@@ -161,6 +162,9 @@ async function persistProductImages(images, slug, category) {
   if (!entries.length) {
     if (category === 'Butchery Equipment') {
       throw new Error('Upload or provide an image for butchery equipment.')
+    }
+    if (category === 'Kitchenware') {
+      return ['/assets/homemate-symbol.png']
     }
     return [category === 'Smartphones'
       ? '/smartphones/iphone_x_1.webp'

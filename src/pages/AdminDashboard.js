@@ -23,7 +23,7 @@ export function renderAdminDashboard(
     return counts
   }, {})
   const productCount = products.length
-  const categoryMix = ['Computers', 'Smartphones', 'Butchery Equipment']
+  const categoryMix = ['Computers', 'Smartphones', 'Butchery Equipment', 'Kitchenware']
     .map((label) => ({
       label,
       count: categoryCounts[label] || 0,
@@ -160,6 +160,7 @@ export function renderAdminDashboard(
                 <option value="Computers">Computers</option>
                 <option value="Smartphones">Smartphones</option>
                 <option value="Butchery Equipment">Butchery Equipment</option>
+                <option value="Kitchenware">Kitchenware</option>
               </select>
             </label>
             <label class="specs-field">Specifications / description
