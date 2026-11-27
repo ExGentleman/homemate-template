@@ -85,7 +85,13 @@ export const authStore = {
       }
     })
     if (error) throw new Error(error.message)
-    if (!data.session || !data.user) return null
+    if (!data.user) {
+      throw new Error('Supabase did not return a user after signup. Check the Auth logs and signup configuration.')
+    }
+    if (data.user.identities?.length === 0) {
+      throw new Error('An account with this email may already exist. Sign in or reset your password.')
+    }
+    if (!data.session) return null
 
     this.user = await loadProfile(data.user)
     return this.user
