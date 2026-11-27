@@ -3423,20 +3423,12 @@ main {
 
 @media (max-width: 560px) {
   .app:not(.is-device-home) .fashion-header {
-    left: 0;
-    position: fixed;
-    right: 0;
-    top: 0;
     transform: translateY(0);
     transition: transform 0.25s ease;
   }
 
   .app:not(.is-device-home) .fashion-header.is-nav-hidden {
     transform: translateY(-105%);
-  }
-
-  .app:not(.is-device-home) main {
-    padding-top: 128px;
   }
 
   .fashion-header-inner {
