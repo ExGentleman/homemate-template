@@ -29,7 +29,7 @@ let adminCustomersError = ''
 let adminCustomersLoading = false
 let lastMobileScrollY = 0
 let mobileNavbarScrollFrame = null
-let productCarouselInterval = null
+let productDetailCarouselInterval = null
 
 const routes = {
   '/': renderHome,
@@ -76,9 +76,9 @@ export function navigate(path) {
 }
 
 export function renderApp() {
-  if (productCarouselInterval !== null) {
-    window.clearInterval(productCarouselInterval)
-    productCarouselInterval = null
+  if (productDetailCarouselInterval !== null) {
+    window.clearInterval(productDetailCarouselInterval)
+    productDetailCarouselInterval = null
   }
 
   const app = document.querySelector('#app')
@@ -252,23 +252,6 @@ function bindLayoutEvents() {
 }
 
 function bindPageEvents() {
-  const productCarousels = [...document.querySelectorAll('[data-product-carousel]')]
-    .map((image) => {
-      const product = products.find((item) => item.id === image.dataset.productCarousel)
-      const images = product?.images?.length ? product.images : product ? [product.image] : []
-      return { image, images, index: 0 }
-    })
-    .filter((carousel) => carousel.images.length > 1)
-
-  if (productCarousels.length) {
-    productCarouselInterval = window.setInterval(() => {
-      productCarousels.forEach((carousel) => {
-        carousel.index = (carousel.index + 1) % carousel.images.length
-        carousel.image.src = carousel.images[carousel.index]
-      })
-    }, 3500)
-  }
-
   const checkoutButton = document.querySelector('.checkout-button')
   const checkoutForm = document.querySelector('[data-checkout-form]')
   if (checkoutButton && checkoutForm) {
@@ -567,19 +550,34 @@ function bindPageEvents() {
     })
   })
 
-  document.querySelectorAll('[data-gallery-image]').forEach((button) => {
+  const galleryButtons = [...document.querySelectorAll('[data-gallery-image]')]
+  let selectedGalleryIndex = 0
+  const showGalleryImage = (index) => {
+    const button = galleryButtons[index]
+    const mainImage = document.querySelector('[data-main-product-image]')
+    if (!button || !mainImage) return
+
+    selectedGalleryIndex = index
+    mainImage.src = button.dataset.galleryImage
+    mainImage.alt = button.dataset.galleryAlt || ''
+    galleryButtons.forEach((thumbnail, thumbnailIndex) => {
+      const selected = thumbnailIndex === index
+      thumbnail.classList.toggle('is-selected', selected)
+      thumbnail.setAttribute('aria-pressed', String(selected))
+    })
+  }
+
+  galleryButtons.forEach((button, index) => {
     button.addEventListener('click', () => {
-      const mainImage = document.querySelector('[data-main-product-image]')
-      if (!mainImage) return
-      mainImage.src = button.dataset.galleryImage
-      mainImage.alt = button.dataset.galleryAlt || ''
-      document.querySelectorAll('[data-gallery-image]').forEach((thumbnail) => {
-        const selected = thumbnail === button
-        thumbnail.classList.toggle('is-selected', selected)
-        thumbnail.setAttribute('aria-pressed', String(selected))
-      })
+      showGalleryImage(index)
     })
   })
+
+  if (galleryButtons.length > 1) {
+    productDetailCarouselInterval = window.setInterval(() => {
+      showGalleryImage((selectedGalleryIndex + 1) % galleryButtons.length)
+    }, 3500)
+  }
 
   document.querySelectorAll('[data-add-product]').forEach((button) => {
     button.addEventListener('click', () => {
